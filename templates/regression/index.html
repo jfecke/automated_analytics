@@ -1,0 +1,45 @@
+<!DOCTYPE html>     
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Automated Regression</title>
+    </head>
+    <body style="margin-top: 30px;margin-left: 30px;">
+        <form action="{% url 'regression:index' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file"
+                   title="Upload excel file"
+                   name="excel_file"
+                   style="border: 1px solid black; padding: 5px;"
+                   required="required">
+            <p>
+            <input type="submit"
+                   value="Upload"
+                   style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+        </form>
+        <p></p>
+        <hr>
+
+        <form action="{% url 'regression:index' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for row in excel_data %}
+            
+            <div class="container">
+                <h3>{{ row }}</h3>
+                <p>Required?<p>
+                <input type="radio" id="yes" name={{ row }} value="yes">
+                <label for="html">Yes</label><br>
+                <input type="radio" id="no" name={{ row }} value="no">
+                <label for="css">No</label><br>
+            <div>
+
+            
+            {% endfor %}
+            <input type="submit" value="Submit" style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+
+
+        </form>
+
+
+    </body>
+</html>
